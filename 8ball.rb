@@ -10,16 +10,17 @@ get '/' do
     haml :eightball
 end
 
+post '/' do
+    @result = true
+    haml :eightball
+end
+
 __END__
 
-@@ layout
-%html
-    = yield
-
 @@ eightball
-%body
-    %h1 #{ $phrases.sample }
-    %img{ :src => "http://web.ics.purdue.edu/~ssanty/images/8ball2.gif" }
-    %form
-        %input{ :type => "button", :value => "Shake!",
-            :onClick => "history.go()"}
+%html
+    %body
+        %h1 #{ @result ? $phrases.sample : "Shake me!" }
+        %img{ :src => "http://web.ics.purdue.edu/~ssanty/images/8ball2.gif" }
+        %form{ :action => "", :method => "post" }
+            %input{ :type => "submit", :value => "Shake!" }
